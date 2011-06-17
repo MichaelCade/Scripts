@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# Adjust LCD brightness of ThinkPad laptops.
+
+CTRL_FILE=/sys/class/backlight/acpi_video0/brightness
+
+usage() {
+echo >&2 Usage: lcd-brightness [value]
+}
+
+case $# in
+0)
+cat $CTRL_FILE
+;;
+1)
+echo $1 >$CTRL_FILE
+;;
+*)
+usage
+esac

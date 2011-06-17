@@ -3,7 +3,7 @@
 '# author: 		Ed Morgan [ed.morgan@hp.com]    	------
 '# version:		0.2 - 16/06/2011					------
 '# changelog: 	0.2 - Added error checking			------
-'# any business related removed before git push     ------
+'# any business stuff removed before git push       ------
 '#--------------------------------------------------------	
 
 Option Explicit

@@ -47,11 +47,11 @@ If Err.Number <> 0 then
 End If
 
 Wscript.StdOut.WriteLine vbCrLf & "========================================================================="
-Wscript.StdOut.WriteLine(" Restricted Script " & strTitle & " " & Now())
+Wscript.StdOut.WriteLine(" Script " & strTitle & " " & Now())
 Wscript.StdOut.WriteLine "=========================================================================" & vbCrLf
 
 objLogFile.WriteLine(vbCrLf & "=========================================================================")
-objLogFile.WriteLine(" Restricted Script " & strTitle & " " & Now())
+objLogFile.WriteLine(" Script " & strTitle & " " & Now())
 objLogFile.WriteLine("=========================================================================" & vbCrLf)
 
 intUserRoleCount = 0
@@ -67,8 +67,8 @@ If Err.Number = 0 Then
 	
 	' Make sure this is only run in R
 	If InStr(LCase(objRootDSE.Get("defaultNamingContext")), "dc=s,") Then
-		objLogFile.WriteLine("ERROR this script must only be run in the R Domain." & vbCrLf)
-		WScript.Echo("ERROR this script must only be run in the R Domain.")
+		objLogFile.WriteLine("ERROR this script must only be run in the Domain." & vbCrLf)
+		WScript.Echo("ERROR this script must only be run in the Domain.")
 		objLogFile.Close
 		WScript.Quit(1)
 	End If

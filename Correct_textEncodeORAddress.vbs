@@ -1,9 +1,9 @@
 '#------	Correct_textEncodedORAddress.vbs		------
-'#								------
-'# author: 		Ed Morgan [atlas-dsmtsme1@mod.uk	------
-'# version:		0.2 - 16/06/2011			------
+'#								                    ------
+'# author: 		Ed Morgan [ed.morgan@hp.com]    	------
+'# version:		0.2 - 16/06/2011			        ------
 '# changelog: 	0.2 - Added error checking			------
-'#--------------------------------------------------------------------	
+'#--------------------------------------------------------	
 
 Option Explicit
 On Error Resume Next
@@ -21,8 +21,8 @@ Dim objRootDSE, objConnection, objCommand, objRecordSet, objUser, objFSO, objLog
 strScriptName = Split(WScript.ScriptName, ".")(0)
 strTitle = strScriptName & " " & SCRIPT_VERSION
 
-' Confirm we're not running in Secret.
-intResponse = MsgBox("This should NOT be run in SECRET domains." & vbCRLF & _
+' Confirm we're running in the right domain.
+intResponse = MsgBox("This should NOT be run in XXX domains." & vbCRLF & _
 				"This will correct all User/Role X.400 addresses with mod1." & vbCRLF & _
                 "All well-formed X.400 addresses will be left unchanged." & vbCRLF & vbCRLF & _
                 "Do you want to Continue?", vbYesNo, strTitle & " All Users/Roles")
@@ -67,8 +67,8 @@ If Err.Number = 0 Then
 	
 	' Make sure this is only run in R
 	If InStr(LCase(objRootDSE.Get("defaultNamingContext")), "dc=s,") Then
-		objLogFile.WriteLine("ERROR this script must only be run in the R Security Domain." & vbCrLf)
-		WScript.Echo("ERROR this script must only be run in the R Security Domain.")
+		objLogFile.WriteLine("ERROR this script must only be run in the R Domain." & vbCrLf)
+		WScript.Echo("ERROR this script must only be run in the R Domain.")
 		objLogFile.Close
 		WScript.Quit(1)
 	End If
@@ -106,12 +106,8 @@ If Err.Number = 0 Then
 				objUser.PutEx ADS_PROPERTY_APPEND, "textEncodedORAddress", strNewX400Addr
 				objUser.SetInfo
 				
-				If Err.Number = 0 Then
-					objLogFile.WriteLine("Account Name: " & strUserName & " X400 address changed to " & strNewX400Addr)
-				Else
-					objLogFile.WriteLine("Could not ammend user: " & strUserName)
-					objLogFile.WriteLine("Error Number: " & Err.Number & " - " & err.Description)
-				End If
+				objLogFile.WriteLine("Account Name: " & strUserName & " X400 address changed to " & strNewX400Addr)
+				intCorrectedAddresses = intCorrectedAddresses + 1
 			Else
 				intWellformedAddresses = intWellformedAddresses + 1
 				objLogFile.WriteLine("Account Name: " & strUserDN & " fine, no changes needed.")

@@ -1,9 +1,9 @@
 '#------	Correct_textEncodedORAddress.vbs		------
-'#								                    ------
+'#								------
 '# author: 		Ed Morgan [ed.morgan@hp.com]    	------
-'# version:		0.2 - 16/06/2011			        ------
+'# version:		0.2 - 16/06/2011			------
 '# changelog: 	0.2 - Added error checking			------
-'#--------------------------------------------------------	
+'#--------------------------------------------------------------------	
 
 Option Explicit
 On Error Resume Next
@@ -23,7 +23,7 @@ strTitle = strScriptName & " " & SCRIPT_VERSION
 
 ' Confirm we're running in the right domain.
 intResponse = MsgBox("This should NOT be run in XXX domains." & vbCRLF & _
-				"This will correct all User/Role X.400 addresses with mod1." & vbCRLF & _
+		"This will correct all User/Role X.400 addresses with mod1." & vbCRLF & _
                 "All well-formed X.400 addresses will be left unchanged." & vbCRLF & vbCRLF & _
                 "Do you want to Continue?", vbYesNo, strTitle & " All Users/Roles")
 				
